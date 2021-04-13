@@ -1,16 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import mockdata from "./mockdata.js";
+import TriviaIndex from "./pages/TriviaIndex";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			questions: mockdata,
+			categories: mockdata,
 		};
 	}
 
 	render() {
-		return <React.Fragment></React.Fragment>;
+		return (
+			<Router>
+				<Switch>
+					<Route exact path='/' component={Home} />
+					<Route
+						path='/triviaindex'
+						render={(props) => (
+							<TriviaIndex categories={this.state.categories} />
+						)}
+					/>
+				</Switch>
+			</Router>
+		);
 	}
 }
 
