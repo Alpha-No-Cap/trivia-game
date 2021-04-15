@@ -25,6 +25,8 @@ const TriviaIndex = (props) => {
 
   return (
     <>
+    <div className="index-container">
+      <div className="dropdown-container">
       <UncontrolledButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
         <DropdownToggle caret>Select Category</DropdownToggle>
 
@@ -33,7 +35,7 @@ const TriviaIndex = (props) => {
             const handlSetCategory = () => {
               setCategory(category.id);
             };
-
+            
             return (
               <DropdownItem onClick={handlSetCategory} key={category.id}>
                 {category.name}
@@ -61,6 +63,8 @@ const TriviaIndex = (props) => {
         </DropdownMenu>
       </UncontrolledButtonDropdown>
       <button onClick={onSubmit}>submit</button>
+      </div>
+    </div>
     </>
   );
 };
