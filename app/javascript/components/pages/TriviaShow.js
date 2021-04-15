@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 class TriviaShow extends Component {
 	render() {
-		console.log(this.props.questions.results[1]);
-		const { getQuestions } = this.props;
-		return <>{getQuestions.results[1].question}</>;
+		const { question } = this.props;
+		console.log(this.props.question);
+		return <></>;
 	}
 }
 export default TriviaShow;

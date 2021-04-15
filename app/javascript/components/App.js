@@ -16,9 +16,12 @@ class App extends React.Component {
 		};
 	}
 	componentDidMount() {
+		console.log("yo");
 		this.getQuestions();
 	}
+
 	getQuestions = () => {
+		console.log("hello");
 		fetch("http://opentdb.com/api.php?category=10&difficulty=medium&amount=30")
 			.then((response) => {
 				return response.json();
@@ -33,6 +36,7 @@ class App extends React.Component {
 	};
 
 	render() {
+		console.log("hi");
 		return (
 			<Router>
 				<Switch>
@@ -44,20 +48,12 @@ class App extends React.Component {
 						)}
 					/>
 					<Route
-						path='/triviashow/1'
+						path='/triviashow/:id'
 						render={(props) => {
-							// const id = +props.match.params.id;
-							// const foundCat = this.state.questions.categories.find(
-							// 	(cat) => cat.id === id
-							// );
-							// return (
-							<TriviaShow
-								questions={this.state.questions.results}
-								// getQuestions={this.getQuestions}
+							console.log(this.state.questions);
+							const id = +props.match.params.id;
 
-								// foundCat={foundCat}
-							/>;
-							// );
+							return <TriviaShow question={this.state.questions.results[id]} />;
 						}}
 					/>
 				</Switch>
