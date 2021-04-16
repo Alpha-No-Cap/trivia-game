@@ -1,64 +1,72 @@
 import React, { useState, Component } from "react";
+import { useHistory } from "react-router-dom";
 import {
-	ButtonDropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledButtonDropdown
 } from "reactstrap";
 
 const TriviaIndex = (props) => {
-	const [dropdownOpen, setOpen] = useState(false);
-	const [dropdownCat, setOpenCat] = useState(false);
-	const toggle = () => setOpen(!dropdownOpen);
-	const toggleCat = () => setOpenCat(!dropdownCat);
+  const [dropdownOpen, setOpen] = useState(false);
+  const [dropdownCat, setOpenCat] = useState(false);
+  const toggle = () => setOpen(!dropdownOpen);
+  const toggleCat = () => setOpenCat(!dropdownCat);
+  const [difficulty, setDifficulty] = useState();
+  const [category, setCategory] = useState();
+  const history = useHistory();
 
-	console.log(props.categories);
+  const onSubmit = () => {
+    props.url(category, difficulty).then(() => {
+      history.push("/triviashow/0");
+    });
+  };
 
-	return (
-		<>
-			<div
-				style={{
-					width: 300,
-					height: 100,
-					border: "1px solid #000",
-					padding: "8px",
-					overflow: "hidden",
-				}}
-			>
-				<ButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
-					<DropdownToggle caret>Select Category</DropdownToggle>
+  return (
+    <>
+    <div className="index-container">
+      <div className="dropdown-container">
+      <UncontrolledButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
+        <DropdownToggle caret>Select Category</DropdownToggle>
 
-					<DropdownMenu>
-						{props.categories.trivia_categories.map((category) => {
-							return (
-								<DropdownItem key={category.id}>{category.name}</DropdownItem>
-							);
-						})}
-					</DropdownMenu>
-				</ButtonDropdown>
-			</div>
-			<br />
-			<div
-				style={{
-					width: 300,
-					height: 100,
-					border: "1px solid #000",
-					padding: "8px",
-					overflow: "hidden",
-				}}
-			>
-				<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-					<DropdownToggle caret>Select Difficulty</DropdownToggle>
+        <DropdownMenu>
+          {props.categories.trivia_categories.map((category) => {
+            const handlSetCategory = () => {
+              setCategory(category.id);
+            };
+            
+            return (
+              <DropdownItem onClick={handlSetCategory} key={category.id}>
+                {category.name}
+              </DropdownItem>
+            );
+          })}
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
 
-					<DropdownMenu>
-						<DropdownItem>easy</DropdownItem>
-						<DropdownItem>medium</DropdownItem>
-						<DropdownItem>hard</DropdownItem>
-					</DropdownMenu>
-				</ButtonDropdown>
-			</div>
-		</>
-	);
+      <br />
+
+      <UncontrolledButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+        <DropdownToggle caret>Select Difficulty</DropdownToggle>
+
+        <DropdownMenu>
+          <DropdownItem onClick={() => setDifficulty("easy")}>
+            easy
+          </DropdownItem>
+          <DropdownItem onClick={() => setDifficulty("medium")}>
+            medium
+          </DropdownItem>
+          <DropdownItem onClick={() => setDifficulty("hard")}>
+            hard
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
+      <button onClick={onSubmit}>submit</button>
+      </div>
+    </div>
+    </>
+  );
 };
 
 export default TriviaIndex;
