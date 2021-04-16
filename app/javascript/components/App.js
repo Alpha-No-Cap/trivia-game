@@ -6,13 +6,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import mockquestions from "./mockquestions.js";
 import TriviaShow from "./pages/TriviaShow";
+// import Header from './components/Header.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: mockdata,
-        questions: []
+        questions: [],
+        score: 0
     };
   }
 
@@ -32,6 +34,10 @@ class App extends React.Component {
       });
   };
 
+  addScore = (points) => {
+    this.setState({score: this.state.score + points } )
+  }
+
   render() {
     const {
       logged_in,
@@ -39,22 +45,29 @@ class App extends React.Component {
       new_user_route,
       sign_in_route,
       sign_out_route,
-      sign_up_route
     } = this.props
 
     console.log("questions: ", this.state.questions);
+    console.log("logged_in:", logged_in)
+    console.log("current user:", current_user)
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" render= {(props) => {
-            <Home 
+        {/* <Header
               logged_in={ logged_in }
               sign_in_route={ sign_in_route }
               sign_out_route={ sign_out_route }
               sign_up_route={ sign_up_route }
-              />
-          }}
-          />
+              /> */}
+        <Switch>
+        
+          <Route exact path="/" render = {(props) => { 
+              return ( <Home  
+                logged_in={ logged_in }
+                sign_in_route={ sign_in_route }
+                sign_out_route={ sign_out_route }
+                sign_up_route={ new_user_route }
+              />)
+          }}/>
           { logged_in &&
           <Route
             path="/triviaindex"
@@ -72,7 +85,11 @@ class App extends React.Component {
               console.log(this.state.questions);
               const id = +props.match.params.id;
 
-              return <TriviaShow question={this.state.questions[id]} />;
+              return <TriviaShow 
+                question={this.state.questions[id]} 
+                score = {this.state.score}
+                addScore = {this.addScore}
+               />;
             }}
           />
         </Switch>

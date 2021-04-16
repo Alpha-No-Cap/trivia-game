@@ -9,32 +9,33 @@ class Home extends Component {
       current_user,
       new_user_route,
       sign_in_route,
-      sign_out_route
+      sign_out_route,
+      sign_up_route
     } = this.props
 
     return (
       <>
         <h1>home</h1>
         { !logged_in &&
-        <NavLink to="/users/sign_in">
-          <Button>
+        <a href={sign_in_route}>
+          <Button >
               Sign In
           </Button>
-        </NavLink>
+        </a>
         }
         { logged_in &&
-        <NavLink to="/users/sign_out">
-          <Button>
+        <a href={sign_out_route}>
+          <Button >
               Sign Out
           </Button>
-        </NavLink>
+        </a>
         }
         { !logged_in &&
-        <NavLink to="/users/sign_up">
-          <Button>
+        <a href={sign_up_route}>
+          <Button >
               Sign Up
           </Button>
-        </NavLink>
+        </a>
         }
       </>
     );
