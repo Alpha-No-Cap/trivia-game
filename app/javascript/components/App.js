@@ -33,21 +33,39 @@ class App extends React.Component {
   };
 
   render() {
+    const {
+      logged_in,
+      current_user,
+      new_user_route,
+      sign_in_route,
+      sign_out_route,
+      sign_up_route
+    } = this.props
+
     console.log("questions: ", this.state.questions);
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" render= {(props) => {
+            <Home 
+              logged_in={ logged_in }
+              sign_in_route={ sign_in_route }
+              sign_out_route={ sign_out_route }
+              sign_up_route={ sign_up_route }
+              />
+          }}
+          />
+          { logged_in &&
           <Route
             path="/triviaindex"
             render={(props) => (
               <TriviaIndex
                 url={this.getQuestions}
-                // questions={this.state.questions}
                 categories={this.state.categories}
+                current_user={ current_user }
               />
             )}
-          />
+          />}
           <Route
             path="/triviashow/:id"
             render={(props) => {
