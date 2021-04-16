@@ -11,14 +11,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: mockdata
-      //   questions: mockquesions
+      categories: mockdata,
+        questions: []
     };
   }
 
   getQuestions = (gameCategory, gameDifficulty) => {
     return fetch(
-      `https://opentdb.com/api.php?amount=50&category=${gameCategory}&difficulty=${gameDifficulty}`
+      `https://opentdb.com/api.php?amount=15&category=${gameCategory}&difficulty=${gameDifficulty}`
     )
       .then((response) => {
         return response.json();
@@ -33,7 +33,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.questions);
+    console.log("questions: ", this.state.questions);
     return (
       <Router>
         <Switch>
@@ -43,6 +43,7 @@ class App extends React.Component {
             render={(props) => (
               <TriviaIndex
                 url={this.getQuestions}
+                // questions={this.state.questions}
                 categories={this.state.categories}
               />
             )}
