@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 // import React, { useState } from "react";
 import {
   useParams,
@@ -8,7 +8,7 @@ import {
   NavLink
 } from "react-router-dom";
 import { Button } from "reactstrap";
-const _ = require('lodash');
+const _ = require("lodash");
 
 const TriviaShow = (props) => {
   const { id } = useParams();
@@ -28,36 +28,52 @@ const TriviaShow = (props) => {
     history.push(`/triviashow/${route}`);
   };
 
-  const { question, addScore, score } = props;
+  const { question, updateGameState, score, lives, resetGame } = props;
   console.log(props.question);
   console.log(id);
 
-  const multiple_choice = useMemo( () =>{
-    return _.shuffle(question.incorrect_answers.concat(question.correct_answer))
-  }, [question]) ;
+  const multiple_choice = useMemo(() => {
+    return _.shuffle(
+      question.incorrect_answers.concat(question.correct_answer)
+    );
+  }, [question]);
 
-  const handleAnswerSelection = (choice) => () => {
-    if(choice === question.correct_answer){
-      return addScore(10)
+  const handleGameEnd = () => {
+    resetGame();
+    history.push("/triviaindex");
+  };
+
+  const handleAnswerSelection = (choice) => {
+    if (choice === question.correct_answer) {
+      return updateGameState(10, 0);
+    } else if (lives === 1) {
+      handleGameEnd();
     } else {
-      return addScore(-5)
+      updateGameState(-5, 1);
     }
-  }
-  console.log(score)
+  };
+
+  console.log(score);
+  console.log(lives);
 
   return (
     <>
-      <h3 dangerouslySetInnerHTML={{__html: question.question}} />
+      <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
       {/* <h3>{question.correct_answer}</h3>
       <h3>{question.incorrect_answers}</h3> */}
-      <h2>score: { score }</h2>
+      <h2>score: {score}</h2>
+      <h2>lives: {lives}</h2>
       <div>
-        { multiple_choice.map(choice => {
+        {multiple_choice.map((choice) => {
           return (
-            <button key={choice} onClick={handleAnswerSelection(choice)}>
+            <button
+              key={choice}
+              onClick={() => {
+                handleAnswerSelection(choice);
+              }}>
               {choice}
             </button>
-          )
+          );
         })}
       </div>
       <br />

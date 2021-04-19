@@ -8,14 +8,18 @@ import mockquestions from "./mockquestions.js";
 import TriviaShow from "./pages/TriviaShow";
 // import Header from './components/Header.js'
 
+const initialState = {
+  categories: mockdata,
+  questions: [],
+  score: 0,
+  lives: 4,
+  user_id: null
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      categories: mockdata,
-      questions: [],
-      score: 0
-    };
+    this.state = initialState;
   }
 
   getQuestions = (gameCategory, gameDifficulty) => {
@@ -34,8 +38,15 @@ class App extends React.Component {
       });
   };
 
-  addScore = (points) => {
+  updateGameState = (points, kill) => {
     this.setState({ score: this.state.score + points });
+    this.setState({ lives: this.state.lives - kill });
+  };
+
+  resetGame = () => {
+    // save final score
+    // reset score, lives, questions to initial state
+    this.setState(initialState);
   };
 
   render() {
@@ -95,7 +106,9 @@ class App extends React.Component {
                 <TriviaShow
                   question={this.state.questions[id]}
                   score={this.state.score}
-                  addScore={this.addScore}
+                  updateGameState={this.updateGameState}
+                  lives={this.state.lives}
+                  resetGame={this.resetGame}
                 />
               );
             }}
