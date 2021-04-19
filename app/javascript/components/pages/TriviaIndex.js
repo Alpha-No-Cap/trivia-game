@@ -1,11 +1,12 @@
 import React, { useState, Component } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  UncontrolledButtonDropdown
+  UncontrolledButtonDropdown,
+  Button
 } from "reactstrap";
 
 const TriviaIndex = (props) => {
@@ -25,46 +26,49 @@ const TriviaIndex = (props) => {
 
   return (
     <>
-    <div className="index-container">
-      <div className="dropdown-container">
-      <UncontrolledButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
-        <DropdownToggle caret>Select Category</DropdownToggle>
+      <div className="index-container">
+        <div className="dropdown-container">
+          <UncontrolledButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
+            <DropdownToggle caret>Select Category</DropdownToggle>
 
-        <DropdownMenu>
-          {props.categories.trivia_categories.map((category) => {
-            const handlSetCategory = () => {
-              setCategory(category.id);
-            };
-            
-            return (
-              <DropdownItem onClick={handlSetCategory} key={category.id}>
-                {category.name}
+            <DropdownMenu>
+              {props.categories.trivia_categories.map((category) => {
+                const handlSetCategory = () => {
+                  setCategory(category.id);
+                };
+
+                return (
+                  <DropdownItem onClick={handlSetCategory} key={category.id}>
+                    {category.name}
+                  </DropdownItem>
+                );
+              })}
+            </DropdownMenu>
+          </UncontrolledButtonDropdown>
+
+          <br />
+
+          <UncontrolledButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+            <DropdownToggle caret>Select Difficulty</DropdownToggle>
+
+            <DropdownMenu>
+              <DropdownItem onClick={() => setDifficulty("easy")}>
+                easy
               </DropdownItem>
-            );
-          })}
-        </DropdownMenu>
-      </UncontrolledButtonDropdown>
-
-      <br />
-
-      <UncontrolledButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle caret>Select Difficulty</DropdownToggle>
-
-        <DropdownMenu>
-          <DropdownItem onClick={() => setDifficulty("easy")}>
-            easy
-          </DropdownItem>
-          <DropdownItem onClick={() => setDifficulty("medium")}>
-            medium
-          </DropdownItem>
-          <DropdownItem onClick={() => setDifficulty("hard")}>
-            hard
-          </DropdownItem>
-        </DropdownMenu>
-      </UncontrolledButtonDropdown>
-      <button onClick={onSubmit}>submit</button>
+              <DropdownItem onClick={() => setDifficulty("medium")}>
+                medium
+              </DropdownItem>
+              <DropdownItem onClick={() => setDifficulty("hard")}>
+                hard
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledButtonDropdown>
+          <Button onClick={onSubmit}>submit</Button>
+          <NavLink to="/leaderboard">
+            <Button>Leader Board</Button>
+          </NavLink>
+        </div>
       </div>
-    </div>
     </>
   );
 };

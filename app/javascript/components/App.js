@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import mockquestions from "./mockquestions.js";
 import TriviaShow from "./pages/TriviaShow";
+import LeaderBoard from "./pages/LeaderBoard";
 // import Header from './components/Header.js'
 
 const initialState = {
@@ -13,7 +14,10 @@ const initialState = {
   questions: [],
   score: 0,
   lives: 4,
-  user_id: null
+  user_id: null,
+  games: []
+  // category: gameCategory,
+  // difficulty: gameDificulty
 };
 
 class App extends React.Component {
@@ -46,7 +50,30 @@ class App extends React.Component {
   resetGame = () => {
     // save final score
     // reset score, lives, questions to initial state
-    this.setState(initialState);
+    this.setState({
+      questions: initialState.questions,
+      score: initialState.score,
+      lives: initialState.lives
+    });
+  };
+
+  componentDidMount() {
+    this.indexGames();
+  }
+
+  indexGames = () => {
+    fetch("http://localhost:3000//games")
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((payload) => {
+        this.setState({ games: payload });
+        console.log(payload);
+      })
+      .catch((errors) => {
+        console.log("index errors:", errors);
+      });
   };
 
   render() {
@@ -63,12 +90,6 @@ class App extends React.Component {
     console.log("current user:", current_user);
     return (
       <Router>
-        {/* <Header
-              logged_in={ logged_in }
-              sign_in_route={ sign_in_route }
-              sign_out_route={ sign_out_route }
-              sign_up_route={ sign_up_route }
-              /> */}
         <Switch>
           <Route
             exact
@@ -91,6 +112,17 @@ class App extends React.Component {
                 <TriviaIndex
                   url={this.getQuestions}
                   categories={this.state.categories}
+                  current_user={current_user}
+                />
+              )}
+            />
+          )}
+          {logged_in && (
+            <Route
+              path="/leaderboard"
+              render={(props) => (
+                <LeaderBoard
+                  games={this.state.games}
                   current_user={current_user}
                 />
               )}

@@ -40,7 +40,7 @@ const TriviaShow = (props) => {
 
   const handleGameEnd = () => {
     resetGame();
-    history.push("/triviaindex");
+    history.push("/leaderboard");
   };
 
   const handleAnswerSelection = (choice) => {
