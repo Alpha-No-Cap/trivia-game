@@ -76,6 +76,28 @@ class App extends React.Component {
       });
   };
 
+  createNewGameStat = (newScore) => {
+    return fetch("http://localhost:3000//games", {
+      body: JSON.stringify(newScore),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+      .then((response) => {
+        if (response.status === 422) {
+          alert("Please check your submission.");
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        this.indexGames();
+      })
+      .catch((errors) => {
+        console.log("create errors:", errors);
+      });
+  };
+
   render() {
     const {
       logged_in,
@@ -141,6 +163,7 @@ class App extends React.Component {
                   updateGameState={this.updateGameState}
                   lives={this.state.lives}
                   resetGame={this.resetGame}
+                  createNewGameStat={this.createNewGameStat}
                 />
               );
             }}
