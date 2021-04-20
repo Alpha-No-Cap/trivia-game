@@ -1,8 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 // import React, { useState } from "react";
 import {
   useParams,
-  useState,
   useHistory,
   Redirect,
   NavLink
@@ -13,10 +12,12 @@ const _ = require("lodash");
 const TriviaShow = (props) => {
   const { id } = useParams();
 
+  const [isDisabled, setDisabled] = useState(false);
   const history = useHistory();
 
   const nextQuestion = () => {
     const increment = 1;
+    setDisabled(false);
     history.push(`/triviashow/${+id + increment}`);
   };
   const previousQuestion = () => {
@@ -45,11 +46,21 @@ const TriviaShow = (props) => {
   };
 
   const handleAnswerSelection = (choice) => {
+    setDisabled(true);
+    const btnClicked = document.getElementById(choice);
+    // const btnCorrect = document.getElementById(question.correct_answer)
+  
+    console.log(question.correct_answer)
+
     if (choice === question.correct_answer) {
+      btnClicked.classList.add("btn-success");
       return updateGameState(10, 0);
     } else if (lives === 1) {
       handleGameEnd();
     } else {
+      btnClicked.classList.add("btn-danger");
+      // btnCorrect.classlist.add("btn-success")
+      // find correct choice and add class to that
       updateGameState(-5, 1);
     }
   };
@@ -68,7 +79,9 @@ const TriviaShow = (props) => {
         {multiple_choice.map((choice) => {
           return (
             <button
+              disabled={isDisabled}
               key={choice}
+              id={choice}
               onClick={() => {
                 handleAnswerSelection(choice);
               }}>

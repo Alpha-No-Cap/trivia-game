@@ -160,6 +160,7 @@ class App extends React.Component {
                 <LeaderBoard
                   games={this.state.games}
                   current_user={current_user}
+                  categories={this.state.categories}
                 />
               )}
             />
