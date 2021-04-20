@@ -19,6 +19,7 @@ const TriviaIndex = (props) => {
   const history = useHistory();
 
   const onSubmit = () => {
+    props.setStateCategoryDifficulty(category,difficulty)
     props.url(category, difficulty).then(() => {
       history.push("/triviashow/0");
     });

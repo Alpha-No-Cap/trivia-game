@@ -9,20 +9,22 @@ import TriviaShow from "./pages/TriviaShow";
 import LeaderBoard from "./pages/LeaderBoard";
 // import Header from './components/Header.js'
 
+//doesnt get manipulated
 const initialState = {
   categories: mockdata,
   questions: [],
   score: 0,
   lives: 4,
   user_id: null,
-  games: []
-  // category: gameCategory,
-  // difficulty: gameDificulty
+  games: [],
+  category: null,
+  difficulty: null
 };
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // basically a copy
     this.state = initialState;
   }
 
@@ -42,9 +44,12 @@ class App extends React.Component {
       });
   };
 
-  updateGameState = (points, kill) => {
-    this.setState({ score: this.state.score + points });
-    this.setState({ lives: this.state.lives - kill });
+  setPointsAndKillState = (points, kill) => {
+    this.setState({ score: this.state.score + points, lives: this.state.lives - kill });
+  };
+
+  setStateCategoryDifficulty = (category, difficulty) => {
+    this.setState({ category: category, difficulty: difficulty })
   };
 
   resetGame = () => {
@@ -76,9 +81,15 @@ class App extends React.Component {
       });
   };
 
-  createNewGameStat = (newScore) => {
+  createNewGameStat = () => {
+    const gameParams= { 
+      score: this.state.score,
+      category: this.state.category,
+      difficulty: this.state.difficulty,
+      user_id: this.props.current_user.id
+    }
     return fetch("http://localhost:3000//games", {
-      body: JSON.stringify(newScore),
+      body: JSON.stringify({game: gameParams}),
       headers: {
         "Content-Type": "application/json"
       },
@@ -107,6 +118,8 @@ class App extends React.Component {
       sign_out_route
     } = this.props;
 
+    console.log(this.state.category)
+    console.log(this.state.difficulty)
     console.log("questions: ", this.state.questions);
     console.log("logged_in:", logged_in);
     console.log("current user:", current_user);
@@ -135,6 +148,7 @@ class App extends React.Component {
                   url={this.getQuestions}
                   categories={this.state.categories}
                   current_user={current_user}
+                  setStateCategoryDifficulty={this.setStateCategoryDifficulty}
                 />
               )}
             />
@@ -160,7 +174,7 @@ class App extends React.Component {
                 <TriviaShow
                   question={this.state.questions[id]}
                   score={this.state.score}
-                  updateGameState={this.updateGameState}
+                  updateGameState={this.setPointsAndKillState}
                   lives={this.state.lives}
                   resetGame={this.resetGame}
                   createNewGameStat={this.createNewGameStat}

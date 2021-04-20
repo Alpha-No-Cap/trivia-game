@@ -39,6 +39,7 @@ const TriviaShow = (props) => {
   }, [question]);
 
   const handleGameEnd = () => {
+    props.createNewGameStat();
     resetGame();
     history.push("/leaderboard");
   };
