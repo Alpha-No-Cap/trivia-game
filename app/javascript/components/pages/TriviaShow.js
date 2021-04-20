@@ -53,8 +53,7 @@ const TriviaShow = (props) => {
     console.log(question.correct_answer)
 
     if (choice === question.correct_answer) {
-      btnClicked.classList.add("btn-success");
-      return updateGameState(10, 0);
+      btnClicked.classList.add("btn-success");updateGameState(10, 0);
     } else if (lives === 1) {
       handleGameEnd();
     } else {
@@ -85,7 +84,7 @@ const TriviaShow = (props) => {
               onClick={() => {
                 handleAnswerSelection(choice);
               }}>
-              {choice}
+              <h4 dangerouslySetInnerHTML={{ __html: choice }} />
             </button>
           );
         })}
