@@ -48,17 +48,18 @@ const TriviaShow = (props) => {
   const handleAnswerSelection = (choice) => {
     setDisabled(true);
     const btnClicked = document.getElementById(choice);
-    // const btnCorrect = document.getElementById(question.correct_answer)
+    const btnCorrect = document.getElementById(question.correct_answer)
   
     console.log(question.correct_answer)
 
     if (choice === question.correct_answer) {
-      btnClicked.classList.add("btn-success");updateGameState(10, 0);
+      btnClicked.classList.add("btn-success");
+      updateGameState(10, 0);
     } else if (lives === 1) {
       handleGameEnd();
     } else {
       btnClicked.classList.add("btn-danger");
-      // btnCorrect.classlist.add("btn-success")
+      btnCorrect.classList.add("btn-success");
       // find correct choice and add class to that
       updateGameState(-5, 1);
     }
@@ -69,34 +70,39 @@ const TriviaShow = (props) => {
 
   return (
     <>
-      <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
-      {/* <h3>{question.correct_answer}</h3>
-      <h3>{question.incorrect_answers}</h3> */}
-      <h2>score: {score}</h2>
-      <h2>lives: {lives}</h2>
-      <div>
-        {multiple_choice.map((choice) => {
-          return (
-            <button
+    <div className="show-container">
+      <div className="question-container">
+        <div className="score-lives-bar">
+        <h2>score: {score}</h2>
+        <h2>lives: {lives}</h2> 
+        <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
+        </div>
+        
+        <div>
+          {multiple_choice.map((choice) => {
+            return (
+              <button
               disabled={isDisabled}
               key={choice}
               id={choice}
               onClick={() => {
                 handleAnswerSelection(choice);
               }}>
-              <h4 dangerouslySetInnerHTML={{ __html: choice }} />
-            </button>
-          );
-        })}
+                <h4 dangerouslySetInnerHTML={{ __html: choice }} />
+              </button>
+            );
+          })}
+        </div>
+        <br />
+
+        <button onClick={previousQuestion}>Previous Question</button>
+        <button onClick={nextQuestion}>Next Question</button>
+
+        <NavLink to="/triviaindex">
+          <Button>Exit Game</Button>
+        </NavLink>
       </div>
-      <br />
-
-      <button onClick={previousQuestion}>Previous Question</button>
-      <button onClick={nextQuestion}>Next Question</button>
-
-      <NavLink to="/triviaindex">
-        <Button>Exit Game</Button>
-      </NavLink>
+    </div>
     </>
   );
 };
