@@ -30,7 +30,7 @@ class App extends React.Component {
 
   getQuestions = (gameCategory, gameDifficulty) => {
     return fetch(
-      `https://opentdb.com/api.php?amount=15&category=${gameCategory}&difficulty=${gameDifficulty}`
+      `https://opentdb.com/api.php?amount=10&category=${gameCategory}&difficulty=${gameDifficulty}`
     )
       .then((response) => {
         return response.json();

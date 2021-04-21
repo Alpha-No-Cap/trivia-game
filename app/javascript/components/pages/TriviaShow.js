@@ -17,8 +17,12 @@ const TriviaShow = (props) => {
 
   const nextQuestion = () => {
     const increment = 1;
-    setDisabled(false);
-    history.push(`/triviashow/${+id + increment}`);
+    if(lives > 0) {
+      setDisabled(false);
+      history.push(`/triviashow/${+id + increment}`);
+      } else {
+      setDisabled(true);
+    }
   };
 
   const previousQuestion = () => {
@@ -76,7 +80,7 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(-5, 1);
-      // setTimeout(handleGameEnd, 10000 );
+      setTimeout(function () {alert("You have 0 lives! Game OVER! Click Leader Board button to see your ranking.")}, 500)
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
