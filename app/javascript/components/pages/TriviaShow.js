@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 // import React, { useState } from "react";
 import {
   useParams,
@@ -20,9 +20,11 @@ const TriviaShow = (props) => {
     setDisabled(false);
     history.push(`/triviashow/${+id + increment}`);
   };
+
   const previousQuestion = () => {
     const increment = 1;
     const route = +id - increment;
+    setDisabled(true);
     if (route < 0) {
       return (route = 0 && alert("can not go back"));
     }
@@ -45,22 +47,39 @@ const TriviaShow = (props) => {
     history.push("/leaderboard");
   };
 
+  const exitToMainMenu = () => {
+    resetGame();
+  }
+
+  useEffect(function(){
+    multiple_choice.map((choice) => {
+      const btnClicked = document.getElementById(choice);
+      const btnCorrect = document.getElementById(question.correct_answer);
+      btnClicked.classList.remove("btn-success")
+      btnClicked.classList.remove("btn-danger")
+      btnCorrect.classList.remove("btn-success")
+      btnCorrect.classList.remove("btn-danger")
+    })
+  }, [question])
+
   const handleAnswerSelection = (choice) => {
     setDisabled(true);
     const btnClicked = document.getElementById(choice);
-    const btnCorrect = document.getElementById(question.correct_answer)
-  
+    const btnCorrect = document.getElementById(question.correct_answer);
+
     console.log(question.correct_answer)
 
     if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
       updateGameState(10, 0);
     } else if (lives === 1) {
-      handleGameEnd();
+      btnClicked.classList.add("btn-danger");
+      btnCorrect.classList.add("btn-success");
+      updateGameState(-5, 1);
+      // setTimeout(handleGameEnd, 10000 );
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
-      // find correct choice and add class to that
       updateGameState(-5, 1);
     }
   };
@@ -95,12 +114,15 @@ const TriviaShow = (props) => {
         </div>
         <br />
 
-        <button onClick={previousQuestion}>Previous Question</button>
-        <button onClick={nextQuestion}>Next Question</button>
+        <Button onClick={previousQuestion}>Previous Question</Button>
+        <Button onClick={nextQuestion}>Next Question</Button>
 
         <NavLink to="/triviaindex">
-          <Button>Exit Game</Button>
+          <Button onClick={exitToMainMenu}>Main Menu</Button>
         </NavLink>
+        
+        <Button onClick={handleGameEnd}>Leader Board</Button>
+      
       </div>
     </div>
     </>
