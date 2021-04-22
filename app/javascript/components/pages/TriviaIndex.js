@@ -19,7 +19,7 @@ const TriviaIndex = (props) => {
   const history = useHistory();
 
   const onSubmit = () => {
-    props.setStateCategoryDifficulty(category,difficulty)
+    props.setStateCategoryDifficulty(category, difficulty);
     props.url(category, difficulty).then(() => {
       history.push("/triviashow/0");
     });
@@ -47,8 +47,6 @@ const TriviaIndex = (props) => {
             </DropdownMenu>
           </UncontrolledButtonDropdown>
 
-          <br />
-
           <UncontrolledButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle caret>Select Difficulty</DropdownToggle>
 
@@ -64,7 +62,9 @@ const TriviaIndex = (props) => {
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledButtonDropdown>
-          <Button onClick={onSubmit}>submit</Button>
+          <div className="submit">
+            <Button onClick={onSubmit}>submit</Button>
+          </div>
           <NavLink to="/leaderboard">
             <Button>Leader Board</Button>
           </NavLink>

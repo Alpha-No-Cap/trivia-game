@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import mockquestions from "./mockquestions.js";
 import TriviaShow from "./pages/TriviaShow";
 import LeaderBoard from "./pages/LeaderBoard";
+import Header from "./components/Header";
 // import Header from './components/Header.js'
 
 //doesnt get manipulated
@@ -45,11 +46,14 @@ class App extends React.Component {
   };
 
   setPointsAndKillState = (points, kill) => {
-    this.setState({ score: this.state.score + points, lives: this.state.lives - kill });
+    this.setState({
+      score: this.state.score + points,
+      lives: this.state.lives - kill
+    });
   };
 
   setStateCategoryDifficulty = (category, difficulty) => {
-    this.setState({ category: category, difficulty: difficulty })
+    this.setState({ category: category, difficulty: difficulty });
   };
 
   resetGame = () => {
@@ -82,14 +86,14 @@ class App extends React.Component {
   };
 
   createNewGameStat = () => {
-    const gameParams= { 
+    const gameParams = {
       score: this.state.score,
       category: this.state.category,
       difficulty: this.state.difficulty,
       user_id: this.props.current_user.id
-    }
+    };
     return fetch("http://localhost:3000//games", {
-      body: JSON.stringify({game: gameParams}),
+      body: JSON.stringify({ game: gameParams }),
       headers: {
         "Content-Type": "application/json"
       },
@@ -118,13 +122,14 @@ class App extends React.Component {
       sign_out_route
     } = this.props;
 
-    console.log(this.state.category)
-    console.log(this.state.difficulty)
+    console.log(this.state.category);
+    console.log(this.state.difficulty);
     console.log("questions: ", this.state.questions);
     console.log("logged_in:", logged_in);
     console.log("current user:", current_user);
     return (
       <Router>
+        <Header />
         <Switch>
           <Route
             exact

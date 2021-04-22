@@ -1,63 +1,95 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- @import 'bootstrap';
+@import "bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap");
+
+* {
+  font-family: "Original Surfer", cursive;
+}
+
+.header-container {
+  height: 30%;
+  //   background-color: rgb(249, 210, 53);
+  background-image: linear-gradient(
+    to right,
+    rgb(48, 112, 250),
+    rgb(160, 80, 252)
+  );
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
 
 .index-container {
-    flex-direction: column;
-    justify-content: center;
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
-} 
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+}
 
 .dropdown-container {
-    max-width: 50%;
-    flex-direction: column;
-    justify-content: center;
-    height: 300px;
-    width: 300px;
-    background-color: blue;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    border-radius: 5%;
-    padding: 3%;
+  width: 400px;
+  height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(48, 112, 250);
+  border: 10px solid rgb(160, 80, 252);
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  border-radius: 5%;
+  padding: 3%;
 }
 
 //--------SHOW PAGE--------------
-.show-container{
-    flex-direction: column;
-    justify-content: center;
-    display: flex;
-    min-height: 100vh;
-    align-items: center;
+.show-container {
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
 }
 
-.question-container{
-    max-width: 75%;
-    flex-direction: column;
-    justify-content: center;
-    background-color: blue;
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    border-radius: 5%;
-    padding: 3%;
+.question-container {
+  max-width: 600px;
+  flex-direction: column;
+  background-color: rgb(48, 112, 250);
+  color: white;
+  align-items: center;
+  display: flex;
+  border-radius: 20px;
+  padding: 3%;
+  border: 10px solid rgb(160, 80, 252);
 }
 
 .score-lives-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 3px solid orange;
+  margin-bottom: 30px;
+}
 
+.score-lives {
+}
+
+.question-answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.choices-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: auto;
+  align-self: auto;
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  color: #fff;
+  background-color: #dead1c;
+  border-color: #dead1c;
 }

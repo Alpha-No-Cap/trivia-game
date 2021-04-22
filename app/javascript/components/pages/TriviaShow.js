@@ -1,11 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 // import React, { useState } from "react";
-import {
-  useParams,
-  useHistory,
-  Redirect,
-  NavLink
-} from "react-router-dom";
+import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { Button } from "reactstrap";
 const _ = require("lodash");
 
@@ -17,10 +12,10 @@ const TriviaShow = (props) => {
 
   const nextQuestion = () => {
     const increment = 1;
-    if(lives > 0) {
+    if (lives > 0) {
       setDisabled(false);
       history.push(`/triviashow/${+id + increment}`);
-      } else {
+    } else {
       setDisabled(true);
     }
   };
@@ -53,25 +48,28 @@ const TriviaShow = (props) => {
 
   const exitToMainMenu = () => {
     resetGame();
-  }
+  };
 
-  useEffect(function(){
-    multiple_choice.map((choice) => {
-      const btnClicked = document.getElementById(choice);
-      const btnCorrect = document.getElementById(question.correct_answer);
-      btnClicked.classList.remove("btn-success")
-      btnClicked.classList.remove("btn-danger")
-      btnCorrect.classList.remove("btn-success")
-      btnCorrect.classList.remove("btn-danger")
-    })
-  }, [question])
+  useEffect(
+    function () {
+      multiple_choice.map((choice) => {
+        const btnClicked = document.getElementById(choice);
+        const btnCorrect = document.getElementById(question.correct_answer);
+        btnClicked.classList.remove("btn-success");
+        btnClicked.classList.remove("btn-danger");
+        btnCorrect.classList.remove("btn-success");
+        btnCorrect.classList.remove("btn-danger");
+      });
+    },
+    [question]
+  );
 
   const handleAnswerSelection = (choice) => {
     setDisabled(true);
     const btnClicked = document.getElementById(choice);
     const btnCorrect = document.getElementById(question.correct_answer);
 
-    console.log(question.correct_answer)
+    console.log(question.correct_answer);
 
     if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
@@ -80,7 +78,11 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(-5, 1);
-      setTimeout(function () {alert("You have 0 lives! Game OVER! Click Leader Board button to see your ranking.")}, 500)
+      setTimeout(function () {
+        alert(
+          "You have 0 lives! Game OVER! Click Leader Board button to see your ranking."
+        );
+      }, 500);
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
@@ -93,42 +95,42 @@ const TriviaShow = (props) => {
 
   return (
     <>
-    <div className="show-container">
-      <div className="question-container">
-        <div className="score-lives-bar">
-        <h2>score: {score}</h2>
-        <h2>lives: {lives}</h2> 
-        <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
-        </div>
-        
-        <div>
-          {multiple_choice.map((choice) => {
-            return (
-              <button
-              disabled={isDisabled}
-              key={choice}
-              id={choice}
-              onClick={() => {
-                handleAnswerSelection(choice);
-              }}>
-                <h4 dangerouslySetInnerHTML={{ __html: choice }} />
-              </button>
-            );
-          })}
-        </div>
-        <br />
+      <div className="show-container">
+        <div className="question-container">
+          <div className="score-lives-bar">
+            <h3 className="score-lives">Score: {score}</h3>
+            <h3 className="score-lives"> Lives: {lives}</h3>
+          </div>
 
-        <Button onClick={previousQuestion}>Previous Question</Button>
-        <Button onClick={nextQuestion}>Next Question</Button>
+          <div className="question-answer">
+            <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
+            {multiple_choice.map((choice) => {
+              return (
+                <button
+                  className="choices-buttons"
+                  disabled={isDisabled}
+                  key={choice}
+                  id={choice}
+                  onClick={() => {
+                    handleAnswerSelection(choice);
+                  }}>
+                  <h4 dangerouslySetInnerHTML={{ __html: choice }} />
+                </button>
+              );
+            })}
+          </div>
+          <br />
 
-        <NavLink to="/triviaindex">
-          <Button onClick={exitToMainMenu}>Main Menu</Button>
-        </NavLink>
-        
-        <Button onClick={handleGameEnd}>Leader Board</Button>
-      
+          <Button onClick={previousQuestion}>Previous Question</Button>
+          <Button onClick={nextQuestion}>Next Question</Button>
+
+          <NavLink to="/triviaindex">
+            <Button onClick={exitToMainMenu}>Main Menu</Button>
+          </NavLink>
+
+          <Button onClick={handleGameEnd}>Leader Board</Button>
+        </div>
       </div>
-    </div>
     </>
   );
 };
