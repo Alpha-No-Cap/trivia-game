@@ -8,7 +8,7 @@ import mockquestions from "./mockquestions.js";
 import TriviaShow from "./pages/TriviaShow";
 import LeaderBoard from "./pages/LeaderBoard";
 import Header from "./components/Header";
-// import Header from './components/Header.js'
+import NotFound from "./pages/NotFound";
 
 //doesnt get manipulated
 const initialState = {
@@ -188,6 +188,9 @@ class App extends React.Component {
                 />
               );
             }}
+          />
+          <Route
+          component={ NotFound }
           />
         </Switch>
       </Router>
