@@ -8,10 +8,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("When app renders", () => {
 	it("it displays Home", () => {
 		const renderedHome = shallow(<Home />);
-		console.log(renderedHome.debug());
 
 		const renderedH = renderedHome.find("h1");
-		console.log(renderedH.debug());
 
 		expect(renderedH.length).toEqual(1);
 	});
