@@ -184,6 +184,7 @@ class App extends React.Component {
                   lives={this.state.lives}
                   resetGame={this.resetGame}
                   createNewGameStat={this.createNewGameStat}
+                  questionsLength={this.state.questions.length}
                 />
               );
             }}

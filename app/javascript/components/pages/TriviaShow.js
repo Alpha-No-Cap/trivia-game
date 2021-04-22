@@ -1,14 +1,18 @@
 import React, { useMemo, useState, useEffect } from "react";
-// import React, { useState } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { Button } from "reactstrap";
 const _ = require("lodash");
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 const TriviaShow = (props) => {
   const { id } = useParams();
 
   const [isDisabled, setDisabled] = useState(false);
   const history = useHistory();
+  const { width, height } = useWindowSize();
+
+  const [showConfetti, setConfetti] = useState(false)
 
   const nextQuestion = () => {
     const increment = 1;
@@ -30,7 +34,7 @@ const TriviaShow = (props) => {
     history.push(`/triviashow/${route}`);
   };
 
-  const { question, updateGameState, score, lives, resetGame } = props;
+  const { question, updateGameState, score, lives, resetGame, questionsLength } = props;
   console.log(props.question);
   console.log(id);
 
@@ -70,11 +74,10 @@ const TriviaShow = (props) => {
     const btnCorrect = document.getElementById(question.correct_answer);
 
     console.log(question.correct_answer);
+    console.log("id: ", id)
+    console.log("question length: ", questionsLength)
 
-    if (choice === question.correct_answer) {
-      btnClicked.classList.add("btn-success");
-      updateGameState(10, 0);
-    } else if (lives === 1) {
+    if (lives === 1) {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(-5, 1);
@@ -83,6 +86,18 @@ const TriviaShow = (props) => {
           "You have 0 lives! Game OVER! Click Leader Board button to see your ranking."
         );
       }, 500);
+    } else if ((lives > 0) && (parseInt(id) === questionsLength - 1) && (choice === question.correct_answer)){
+      btnClicked.classList.add("btn-success");
+      updateGameState(10, 0);
+      setConfetti(true)
+    } else if ((lives > 1) && (parseInt(id) === questionsLength - 1) && (choice !== question.correct_answer)){
+      btnClicked.classList.add("btn-danger");
+      btnCorrect.classList.add("btn-success");
+      updateGameState(-5, 1);
+      setConfetti(true)
+    } else if (choice === question.correct_answer) {
+      btnClicked.classList.add("btn-success");
+      updateGameState(10, 0);
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
@@ -92,6 +107,7 @@ const TriviaShow = (props) => {
 
   console.log(score);
   console.log(lives);
+  console.log("show cofetti: ", showConfetti)
 
   return (
     <>
@@ -118,6 +134,11 @@ const TriviaShow = (props) => {
                 </button>
               );
             })}
+
+            {showConfetti && (<Confetti
+              width={width}
+             height={height}
+            />)}
           </div>
           <br />
 
