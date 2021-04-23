@@ -101,11 +101,10 @@ const TriviaShow = (props) => {
     console.log("id: ", id);
     console.log("question length: ", questionsLength);
 
-    if (lives === 1) {
+    if (lives === 1 && choice !== question.correct_answer) {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
-      // setLoserModal(true);
       setTimeout(function () {
         setLoserModal(true);
       }, 500);
@@ -117,7 +116,9 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
       setConfetti(true);
-      setWinnerModal(true);
+      setTimeout(function () {
+        setWinnerModal(true);
+      }, 500);
     } else if (
       lives > 1 &&
       parseInt(id) === questionsLength - 1 &&
@@ -127,7 +128,9 @@ const TriviaShow = (props) => {
       btnCorrect.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
       setConfetti(true);
-      setWinnerModal(true);
+      setTimeout(function () {
+        setWinnerModal(true);
+      }, 500);
     } else if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
@@ -166,7 +169,7 @@ const TriviaShow = (props) => {
             </div>
           )}
           {showLoserModal && (
-            <div>
+            <div className="loser-modal">
               <Modal isOpen={showLoserModal}>
                 <ModalHeader>Game Over!</ModalHeader>
                 <ModalBody>

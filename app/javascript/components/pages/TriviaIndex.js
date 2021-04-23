@@ -31,6 +31,7 @@ const TriviaIndex = (props) => {
     <>
       <div className="index-container">
         <div className="dropdown-container">
+          <h4 className="menu-header">Main Menu</h4>
           <UncontrolledButtonDropdown isOpen={dropdownCat} toggle={toggleCat}>
             <DropdownToggle caret>{categoryLabel}</DropdownToggle>
 
