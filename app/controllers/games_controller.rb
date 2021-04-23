@@ -6,12 +6,16 @@ class GamesController < ApplicationController
 
     def create
         game = Game.create(game_params)
-        render json: game
+        if game.valid?
+			render json: game
+		else
+			render json: game.errors
+        end
     end
 
     private 
     def game_params
-        params.require(:game).permit(:score, :streak, :category, :difficulty, :user_id)
+        params.require(:game).permit(:score, :category, :difficulty)
     end
 end
 

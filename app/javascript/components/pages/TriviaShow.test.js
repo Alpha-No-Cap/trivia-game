@@ -1,18 +1,17 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import Home from "./Home";
+import TriviaShow from "./TriviaShow";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("When app renders", () => {
-	it("it displays Home", () => {
-		const renderedHome = shallow(<Home />);
-		console.log(renderedHome.debug());
+describe("When triviaShow renders", () => {
+	it("it displays Score and Lives", () => {
+		
+		const renderedQuestions = shallow(<TriviaShow score={0} lives={4} />);
 
-		const renderedH = renderedHome.find("h1");
-		console.log(renderedH.debug());
+		const renderedQ = renderedQuestions.find("h3");
 
-		expect(renderedH.length).toEqual(1);
+		expect(renderedQ.length).toEqual(2);
 	});
 });
