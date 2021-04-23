@@ -7,7 +7,9 @@ class Header extends Component {
     return (
       <>
         <div className="header-container">
-          <h2>Thirsty For Knowledge</h2>
+          <a href="/" className="home-link">
+            <h2>Thirsty For Knowledge</h2>
+          </a>
         </div>
       </>
     );
