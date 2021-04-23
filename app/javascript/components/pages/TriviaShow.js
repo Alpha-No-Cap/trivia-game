@@ -14,15 +14,29 @@ import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 const _ = require("lodash");
 
-const TriviaShow = (props) => {
-  const { id } = useParams();
+const DIFFICULTY_SCORE_MAP = {
+  easy: { positive: 10, negative: -5 },
+  medium: { positive: 20, negative: -10 },
+  hard: { positive: 30, negative: -15 }
+};
 
+const TriviaShow = (props) => {
+  const {
+    question,
+    updateGameState,
+    score,
+    lives,
+    resetGame,
+    questionsLength,
+    difficulty
+  } = props;
+
+  const { id } = useParams();
   const [isDisabled, setDisabled] = useState(false);
   const history = useHistory();
   const { width, height } = useWindowSize();
   const [showWinnerModal, setWinnerModal] = useState(false);
   const [showLoserModal, setLoserModal] = useState(false);
-
   const [showConfetti, setConfetti] = useState(false);
 
   const nextQuestion = () => {
@@ -45,14 +59,6 @@ const TriviaShow = (props) => {
     history.push(`/triviashow/${route}`);
   };
 
-  const {
-    question,
-    updateGameState,
-    score,
-    lives,
-    resetGame,
-    questionsLength
-  } = props;
   console.log(props.question);
   console.log(id);
 
@@ -98,7 +104,7 @@ const TriviaShow = (props) => {
     if (lives === 1) {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
-      updateGameState(-5, 1);
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
       // setLoserModal(true);
       setTimeout(function () {
         setLoserModal(true);
@@ -109,7 +115,7 @@ const TriviaShow = (props) => {
       choice === question.correct_answer
     ) {
       btnClicked.classList.add("btn-success");
-      updateGameState(10, 0);
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
       setConfetti(true);
       setWinnerModal(true);
     } else if (
@@ -119,16 +125,16 @@ const TriviaShow = (props) => {
     ) {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
-      updateGameState(-5, 1);
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
       setConfetti(true);
       setWinnerModal(true);
     } else if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
-      updateGameState(10, 0);
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
-      updateGameState(-5, 1);
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
     }
   };
 
