@@ -29,6 +29,16 @@
   font-weight: bold;
 }
 
+// -------Home--------
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// -----Index-Page-----
+
 .index-container {
   flex-direction: column;
   justify-content: center;
@@ -51,7 +61,12 @@
   padding: 3%;
 }
 
+.menu-header {
+  color: white;
+}
+
 //--------SHOW PAGE--------------
+
 .show-container {
   flex-direction: column;
   justify-content: center;
@@ -129,5 +144,10 @@ element.style {
 }
 .modal-footer {
   background-color: #28a745;
+  color: white;
+}
+
+.loser-modal {
+  background-color: #c70202;
   color: white;
 }

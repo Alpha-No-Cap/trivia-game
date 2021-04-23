@@ -185,13 +185,12 @@ class App extends React.Component {
                   resetGame={this.resetGame}
                   createNewGameStat={this.createNewGameStat}
                   questionsLength={this.state.questions.length}
+                  difficulty={this.state.difficulty}
                 />
               );
             }}
           />
-          <Route
-          component={ NotFound }
-          />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );
