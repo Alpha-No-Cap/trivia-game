@@ -4,6 +4,16 @@
 * {
   font-family: "Original Surfer", cursive;
 }
+// -------Header---------
+
+.home-link {
+  color: white;
+  text-decoration: none;
+}
+.home-link:hover {
+  color: white;
+  text-decoration: none;
+}
 
 .header-container {
   height: 30%;
@@ -92,4 +102,32 @@
   color: #fff;
   background-color: #dead1c;
   border-color: #dead1c;
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  color: #3ca745;
+  background-color: #f8f9fa;
+  background-clip: padding-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+element.style {
+}
+
+.modal-header {
+  background-color: #28a745;
+  color: white;
+}
+.modal-body {
+  background-color: #28a745;
+  color: white;
+}
+.modal-footer {
+  background-color: #28a745;
+  color: white;
 }

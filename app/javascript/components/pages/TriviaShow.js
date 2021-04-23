@@ -1,6 +1,15 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
-import { Button } from "reactstrap";
+import {
+  Button,
+  Toast,
+  ToastBody,
+  ToastHeader,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "reactstrap";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 const _ = require("lodash");
@@ -11,6 +20,8 @@ const TriviaShow = (props) => {
   const [isDisabled, setDisabled] = useState(false);
   const history = useHistory();
   const { width, height } = useWindowSize();
+  const [showWinnerModal, setWinnerModal] = useState(false);
+  const [showLoserModal, setLoserModal] = useState(false);
 
   const [showConfetti, setConfetti] = useState(false);
 
@@ -88,10 +99,9 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(-5, 1);
+      // setLoserModal(true);
       setTimeout(function () {
-        alert(
-          "You have 0 lives! Game OVER! Click Leader Board button to see your ranking."
-        );
+        setLoserModal(true);
       }, 500);
     } else if (
       lives > 0 &&
@@ -101,6 +111,7 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-success");
       updateGameState(10, 0);
       setConfetti(true);
+      setWinnerModal(true);
     } else if (
       lives > 1 &&
       parseInt(id) === questionsLength - 1 &&
@@ -110,6 +121,7 @@ const TriviaShow = (props) => {
       btnCorrect.classList.add("btn-success");
       updateGameState(-5, 1);
       setConfetti(true);
+      setWinnerModal(true);
     } else if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
       updateGameState(10, 0);
@@ -132,6 +144,35 @@ const TriviaShow = (props) => {
             <h3 className="score-lives">Score: {score}</h3>
             <h3 className="score-lives"> Lives: {lives}</h3>
           </div>
+
+          {showWinnerModal && (
+            <div>
+              <Modal isOpen={showWinnerModal}>
+                <ModalHeader>Congrats You Won!</ModalHeader>
+                <ModalBody>
+                  You have proven your knowledge! Please continute to the Leader
+                  Board to see your final score.
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={handleGameEnd}>Leader Board</Button>
+                </ModalFooter>
+              </Modal>
+            </div>
+          )}
+          {showLoserModal && (
+            <div>
+              <Modal isOpen={showLoserModal}>
+                <ModalHeader>Game Over!</ModalHeader>
+                <ModalBody>
+                  LOSER! LOSER! LOSER! LOSER! LOSER! LOSER! Please continute to
+                  the Leader Board to see your final score.
+                </ModalBody>
+                <ModalFooter>
+                  <Button onClick={handleGameEnd}>Leader Board</Button>
+                </ModalFooter>
+              </Modal>
+            </div>
+          )}
 
           <div className="question-answer">
             <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
