@@ -32,13 +32,15 @@ const TriviaShow = (props) => {
   } = props;
 
   const { id } = useParams();
-  const [isDisabled, setDisabled] = useState(false);
   const history = useHistory();
-  const { width, height } = useWindowSize();
+  const [isDisabled, setDisabled] = useState(false);
   const [showWinnerModal, setWinnerModal] = useState(false);
   const [showLoserModal, setLoserModal] = useState(false);
   const [showConfetti, setConfetti] = useState(false);
-
+  const { width, height } = useWindowSize();
+  const [showWinPicture, setWinPicture] = useState(false);
+  const [showWrongPicture, setWrongPicture] = useState(false);
+  
   const nextQuestion = () => {
     const increment = 1;
     if (lives > 0) {
@@ -47,6 +49,8 @@ const TriviaShow = (props) => {
     } else {
       setDisabled(true);
     }
+    setWinPicture(false);
+    setWrongPicture(false);
   };
 
   const previousQuestion = () => {
@@ -105,6 +109,7 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
+      setWrongPicture(true);
       setTimeout(function () {
         setLoserModal(true);
       }, 500);
@@ -116,6 +121,7 @@ const TriviaShow = (props) => {
       btnClicked.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
       setConfetti(true);
+      setWinPicture(true);
       setTimeout(function () {
         setWinnerModal(true);
       }, 500);
@@ -128,16 +134,19 @@ const TriviaShow = (props) => {
       btnCorrect.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
       setConfetti(true);
+      setWrongPicture(true);
       setTimeout(function () {
         setWinnerModal(true);
       }, 500);
     } else if (choice === question.correct_answer) {
       btnClicked.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
+      setWinPicture(true);
     } else {
       btnClicked.classList.add("btn-danger");
       btnCorrect.classList.add("btn-success");
       updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
+      setWrongPicture(true);
     }
   };
 
@@ -147,6 +156,8 @@ const TriviaShow = (props) => {
 
   return (
     <>
+    {showWinPicture && 
+          <img src="https://lh3.googleusercontent.com/proxy/ajb4XaOTbEMDP995DpxkkyV2fq77_0pgKg-RltqkHArKn4JLItIu6MyS5A4QTAu6PDE0HLIyuQBIDsXSkWHmvPpUAKxaIUINC9BxVr9EgOJ4BbomMsYxB7Q" className="donkey-correct"></img>}
       <div className="show-container">
         <div className="question-container">
           <div className="score-lives-bar">
@@ -216,6 +227,8 @@ const TriviaShow = (props) => {
           </div>
         </div>
       </div>
+      {showWrongPicture && 
+          <img src="https://dejpknyizje2n.cloudfront.net/marketplace/products/stupid-donkey-in-cartoon-style-sticker-1591669984.8346424.png" className="donkey-wrong"></img>}
     </>
   );
 };
