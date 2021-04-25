@@ -156,8 +156,10 @@ const TriviaShow = (props) => {
 
   return (
     <>
-    {showWinPicture && 
-          <img src="https://lh3.googleusercontent.com/proxy/ajb4XaOTbEMDP995DpxkkyV2fq77_0pgKg-RltqkHArKn4JLItIu6MyS5A4QTAu6PDE0HLIyuQBIDsXSkWHmvPpUAKxaIUINC9BxVr9EgOJ4BbomMsYxB7Q" className="donkey-correct"></img>}
+      {showWinPicture && 
+        <img src="https://lh3.googleusercontent.com/proxy/ajb4XaOTbEMDP995DpxkkyV2fq77_0pgKg-RltqkHArKn4JLItIu6MyS5A4QTAu6PDE0HLIyuQBIDsXSkWHmvPpUAKxaIUINC9BxVr9EgOJ4BbomMsYxB7Q" className="donkey-correct">
+        </img>
+      }
       <div className="show-container">
         <div className="question-container">
           <div className="score-lives-bar">
@@ -228,7 +230,9 @@ const TriviaShow = (props) => {
         </div>
       </div>
       {showWrongPicture && 
-          <img src="https://dejpknyizje2n.cloudfront.net/marketplace/products/stupid-donkey-in-cartoon-style-sticker-1591669984.8346424.png" className="donkey-wrong"></img>}
+        <img src="https://dejpknyizje2n.cloudfront.net/marketplace/products/stupid-donkey-in-cartoon-style-sticker-1591669984.8346424.png" className="donkey-wrong">
+        </img>
+      }
     </>
   );
 };
