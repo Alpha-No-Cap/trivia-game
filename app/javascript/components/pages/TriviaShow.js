@@ -33,11 +33,15 @@ const TriviaShow = (props) => {
 
   const { id } = useParams();
   const history = useHistory();
+
   const [isDisabled, setDisabled] = useState(false);
+
   const [showWinnerModal, setWinnerModal] = useState(false);
   const [showLoserModal, setLoserModal] = useState(false);
+
   const [showConfetti, setConfetti] = useState(false);
   const { width, height } = useWindowSize();
+  
   const [showWinPicture, setWinPicture] = useState(false);
   const [showWrongPicture, setWrongPicture] = useState(false);
   
