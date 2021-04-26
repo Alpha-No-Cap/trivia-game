@@ -71,7 +71,7 @@ class App extends React.Component {
   }
 
   indexGames = () => {
-    fetch("http://localhost:3000//games")
+    fetch("/games")
       .then((response) => {
         console.log(response);
         return response.json();
@@ -92,7 +92,7 @@ class App extends React.Component {
       difficulty: this.state.difficulty,
       user_id: this.props.current_user.id
     };
-    return fetch("http://localhost:3000//games", {
+    return fetch("/games", {
       body: JSON.stringify({ game: gameParams }),
       headers: {
         "Content-Type": "application/json"
