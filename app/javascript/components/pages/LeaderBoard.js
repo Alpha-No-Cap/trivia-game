@@ -36,33 +36,37 @@ const LeaderBoard = (props) => {
 
   return (
     <>
-      <Table size="sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Score</th>
-            <th>User ID</th>
-            <th>Category</th>
-            <th>Difficulty</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((field, index) => {
-            return (
-              <tr key={field.id}>
-                <th scope="row">{index + 1}</th>
-                <td>{field.score}</td>
-                <td>{field.user_id}</td>
-                <td>{category_names[field.category]}</td>
-                <td>{field.difficulty}</td>
+      <div className="leader-container">
+        <div className="leader-content">
+          <Table size="sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Score</th>
+                <th>User ID</th>
+                <th>Category</th>
+                <th>Difficulty</th>
               </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-      <NavLink to="/triviaindex">
-        <Button>Main Menu</Button>
-      </NavLink>
+            </thead>
+            <tbody>
+              {sorted.map((field, index) => {
+                return (
+                  <tr key={field.id}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{field.score}</td>
+                    <td>{field.user_id}</td>
+                    <td>{category_names[field.category]}</td>
+                    <td>{field.difficulty}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+          <NavLink to="/triviaindex">
+            <Button>Main Menu</Button>
+          </NavLink>
+        </div>
+      </div>
     </>
   );
 };

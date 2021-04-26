@@ -151,6 +151,9 @@ const TriviaShow = (props) => {
         <div className="question-container">
           <div className="score-lives-bar">
             <h3 className="score-lives">Score: {score}</h3>
+            <NavLink to="/triviaindex">
+              <Button onClick={exitToMainMenu}>Main Menu</Button>
+            </NavLink>
             <h3 className="score-lives"> Lives: {lives}</h3>
           </div>
 
@@ -202,16 +205,15 @@ const TriviaShow = (props) => {
 
             {showConfetti && <Confetti width={width} height={height} />}
           </div>
-          <br />
 
-          <Button onClick={previousQuestion}>Previous Question</Button>
-          <Button onClick={nextQuestion}>Next Question</Button>
-
-          <NavLink to="/triviaindex">
-            <Button onClick={exitToMainMenu}>Main Menu</Button>
-          </NavLink>
-
-          <Button onClick={handleGameEnd}>Leader Board</Button>
+          <div className="nxt-prev-btns-container">
+            <Button className="nxt-prev-btns" onClick={previousQuestion}>
+              Previous Question
+            </Button>
+            <Button className="nxt-prev-btns" onClick={nextQuestion}>
+              Next Question
+            </Button>
+          </div>
         </div>
       </div>
     </>
