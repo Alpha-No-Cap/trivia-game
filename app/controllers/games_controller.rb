@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
     def index 
         games = Game.all
-        render json: games
+        render json: games, :include => {:user => {:only => :username}}
     end
 
     def create

@@ -43,7 +43,7 @@ const LeaderBoard = (props) => {
               <tr>
                 <th>#</th>
                 <th>Score</th>
-                <th>User ID</th>
+                <th>User Name</th>
                 <th>Category</th>
                 <th>Difficulty</th>
               </tr>
@@ -54,7 +54,7 @@ const LeaderBoard = (props) => {
                   <tr key={field.id}>
                     <th scope="row">{index + 1}</th>
                     <td>{field.score}</td>
-                    <td>{field.user_id}</td>
+                    <td>{field.user.username}</td>
                     <td>{category_names[field.category]}</td>
                     <td>{field.difficulty}</td>
                   </tr>
