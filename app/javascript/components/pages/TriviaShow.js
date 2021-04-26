@@ -191,12 +191,12 @@ const TriviaShow = (props) => {
           {showLoserModal && (
             <div className="loser-modal">
               <Modal isOpen={showLoserModal}>
-                <ModalHeader>Game Over!</ModalHeader>
-                <ModalBody>
+                <ModalHeader className="loser-modal-header">Game Over!</ModalHeader>
+                <ModalBody className="loser-modal-body">
                   LOSER! LOSER! LOSER! LOSER! LOSER! LOSER! Please continute to
                   the Leader Board to see your final score.
                 </ModalBody>
-                <ModalFooter>
+                <ModalFooter className="loser-modal-footer">
                   <Button onClick={handleGameEnd}>Leader Board</Button>
                 </ModalFooter>
               </Modal>

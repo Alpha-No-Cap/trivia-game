@@ -184,8 +184,16 @@
   color: white;
 }
 
-.loser-modal {
-  background-color: #c70202;
+.loser-modal-header {
+  background-color: red;
+  color: white;
+}
+.loser-modal-body {
+  background-color: red;
+  color: white;
+}
+.loser-modal-footer {
+  background-color: red;
   color: white;
 }
 
@@ -220,4 +228,6 @@
   border-radius: 20px;
   padding: 3%;
   border: 10px solid rgb(48, 112, 250);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
