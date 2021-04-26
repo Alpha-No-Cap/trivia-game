@@ -9,7 +9,7 @@ class GamesController < ApplicationController
         if game.valid?
 			render json: game
 		else
-			render json: game.errors
+			render json: game.errors, status: :unprocessable_entity
         end
     end
 
