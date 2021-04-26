@@ -111,6 +111,18 @@
 
 //--------SHOW PAGE--------------
 
+.donkey-correct {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.donkey-wrong {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+
 .show-container {
   flex-direction: column;
   justify-content: center;
