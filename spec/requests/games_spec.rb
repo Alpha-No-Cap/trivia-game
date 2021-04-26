@@ -77,7 +77,6 @@ RSpec.describe "Games", type: :request do
       )
       game_params = {
           game: {
-            score: 200, 
             category: 'Entertainment: Film', 
             difficulty: 'hard',
             game_id: game1.id,
