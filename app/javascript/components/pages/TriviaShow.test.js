@@ -7,11 +7,22 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("When triviaShow renders", () => {
 	it("it displays Score and Lives", () => {
-		
-		const renderedQuestions = shallow(<TriviaShow score={0} lives={4} />);
+		const question_mock = { question: [ 
+			{
+				category: "Entertainment: Board Games",
+				type: "boolean",
+				difficulty: "easy",
+				question: "Snakes and Ladders was originally created in India?",
+				correct_answer: "True",
+				incorrect_answers: ["False"]
+			  }
+			]
+		};
+
+		const renderedQuestions = shallow(<TriviaShow score={0} lives={4} question={ question_mock[1] } />)
 
 		const renderedQ = renderedQuestions.find("h3");
 
-		expect(renderedQ.length).toEqual(2);
+		expect(renderedQ.length).toEqual(3);
 	});
 });

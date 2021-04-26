@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* **Thirsty for Knowledge** is a full-stack hybrid web application developed in React on Rails and RESTful API integration with [Open Trivia DB](https://opentdb.com/api_config.php)
 
-Things you may want to cover:
+* This app is made to turn those dull family nights into a challenging quiz-based learning experience. You have four lives to race to the top of the leaderboard, just select a category and select a difficulty to get started.
 
-- Ruby version
+* Implements: Javascript, HTML, CSS, Bootstrap, Reactstrap, React Hooks and React Functional Components, Lodash, deployment with Heroku, Version Control with Git, and Test-Driven Development with Jest/Enzyme and RSpec.
 
-- System dependencies
-
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+* Capstone Dev Team
+..- Product Manager: Raul | [github](https://github.com/REV004)..
+..-Project Manager: Justin | [Portfolio](https://justinhilario.co)..
+..-Tech Lead: Stephanie | [github](https://www.linkedin.com/in/steph-begle/) [linkedin](https://www.linkedin.com/in/steph-begle/)..
+..- Design Lead: Nick | [github](https://github.com/nickdsaunders)..
