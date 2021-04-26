@@ -1,5 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
+import smart_donkey from "/app/assets/images/smart_donkey_two.png";
+import stupid_donkey from "/app/assets/images/stupid_donkey.png";
 import {
   Button,
   Toast,
@@ -161,7 +163,7 @@ const TriviaShow = (props) => {
   return (
     <>
       {showWinPicture && 
-        <img src="https://lh3.googleusercontent.com/proxy/ajb4XaOTbEMDP995DpxkkyV2fq77_0pgKg-RltqkHArKn4JLItIu6MyS5A4QTAu6PDE0HLIyuQBIDsXSkWHmvPpUAKxaIUINC9BxVr9EgOJ4BbomMsYxB7Q" className="donkey-correct">
+        <img src={smart_donkey} className="donkey-correct">
         </img>
       }
       <div className="show-container">
@@ -234,7 +236,7 @@ const TriviaShow = (props) => {
         </div>
       </div>
       {showWrongPicture && 
-        <img src="https://dejpknyizje2n.cloudfront.net/marketplace/products/stupid-donkey-in-cartoon-style-sticker-1591669984.8346424.png" className="donkey-wrong">
+        <img src={stupid_donkey} className="donkey-wrong">
         </img>
       }
     </>
