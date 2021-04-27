@@ -2,9 +2,14 @@
 
 * **Thirsty for Knowledge** is a full-stack hybrid web application developed in React on Rails and RESTful API integration with [Open Trivia DB](https://opentdb.com/api_config.php)
 
-* This app is made to turn those dull family nights into a challenging quiz-based learning experience. You have four lives to race to the top of the leaderboard, just select a category and select a difficulty to get started.
+* This app is made to turn those dull family nights into a challenging quiz-based learning experience. You have four lives to race to the top of the leaderboard, just select a category and select a difficulty to [get started](https://evening-chamber-40393.herokuapp.com).
 
-* Implements: Javascript, HTML, CSS, Bootstrap, Reactstrap, React Hooks and React Functional Components, Lodash, deployment with Heroku, Version Control with Git, and Test-Driven Development with Jest/Enzyme and RSpec.
+* Implements: 
+    * Javascript, HTML, CSS, Bootstrap, Reactstrap, Lodash
+    * React Hooks, React Functional Components, React Class Components
+    * Heroku deployment and Version Control with Git 
+    * Authentication and Authorization with Devise adapted to accept usernames
+    * Test-Driven Development with Jest/Enzyme and RSpec.
 
 ***
 
