@@ -6,8 +6,10 @@
 
 * Implements: Javascript, HTML, CSS, Bootstrap, Reactstrap, React Hooks and React Functional Components, Lodash, deployment with Heroku, Version Control with Git, and Test-Driven Development with Jest/Enzyme and RSpec.
 
+***
+
 * Capstone Dev Team
-..- Product Manager: Raul | [github](https://github.com/REV004)..
-..-Project Manager: Justin | [Portfolio](https://justinhilario.co)..
-..-Tech Lead: Stephanie | [github](https://www.linkedin.com/in/steph-begle/) [linkedin](https://www.linkedin.com/in/steph-begle/)..
-..- Design Lead: Nick | [github](https://github.com/nickdsaunders)..
+    * Product Manager: Raul | [GitHub](https://github.com/REV004)
+    * Project Manager: Justin | [Portfolio](https://justinhilario.co)
+    * Tech Lead: Stephanie | [GitHub](https://www.linkedin.com/in/steph-begle/) [LinkedIn](https://www.linkedin.com/in/steph-begle/)
+    * Design Lead: Nick | [Github](https://github.com/nickdsaunders)
