@@ -9,6 +9,7 @@ import TriviaShow from "./pages/TriviaShow";
 import LeaderBoard from "./pages/LeaderBoard";
 import Header from "./components/Header";
 import NotFound from "./pages/NotFound";
+import About from "./pages/About";
 
 //doesnt get manipulated
 const initialState = {
@@ -190,6 +191,7 @@ class App extends React.Component {
               );
             }}
           />
+          <Route path="/about" render={About} />
           <Route component={NotFound} />
         </Switch>
       </Router>
