@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { Button } from "reactstrap";
+import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 
 class Home extends Component {
   render() {
@@ -20,10 +19,10 @@ class Home extends Component {
             <h2 className="home-header">Welcome❕</h2>
             <h4 className="home-instructions">
               This is a fun game of trivia that you can play on your own or with
-              your{" "}
+              your{' '}
               <a href="/about" className="about-link">
                 friends!
-              </a>{" "}
+              </a>{' '}
               Quench your thirst for knowledge by choosing your category and
               difficulty to start the game. You get more points for each
               question by increasing the difficulty at the start of the game. So

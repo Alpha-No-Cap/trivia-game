@@ -1,20 +1,11 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
-import smart_donkey from "/app/assets/images/smart_donkey_two.png";
-import stupid_donkey from "/app/assets/images/stupid_donkey.png";
-import {
-  Button,
-  Toast,
-  ToastBody,
-  ToastHeader,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from "reactstrap";
-import Confetti from "react-confetti";
-import useWindowSize from "react-use/lib/useWindowSize";
-const _ = require("lodash");
+import React, { useMemo, useState, useEffect } from 'react';
+import { useParams, useHistory, NavLink } from 'react-router-dom';
+import smart_donkey from '/app/assets/images/smart_donkey_two.png';
+import stupid_donkey from '/app/assets/images/stupid_donkey.png';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
+const _ = require('lodash');
 
 const DIFFICULTY_SCORE_MAP = {
   easy: { positive: 10, negative: -5 },
@@ -43,10 +34,10 @@ const TriviaShow = (props) => {
 
   const [showConfetti, setConfetti] = useState(false);
   const { width, height } = useWindowSize();
-  
+
   const [showWinPicture, setWinPicture] = useState(false);
   const [showWrongPicture, setWrongPicture] = useState(false);
-  
+
   const nextQuestion = () => {
     const increment = 1;
     if (lives > 0) {
@@ -64,7 +55,7 @@ const TriviaShow = (props) => {
     const route = +id - increment;
     setDisabled(true);
     if (route < 0) {
-      return (route = 0 && alert("can not go back"));
+      return (route = 0 && alert('can not go back'));
     }
     history.push(`/triviashow/${route}`);
   };
@@ -81,7 +72,7 @@ const TriviaShow = (props) => {
   const handleGameEnd = () => {
     props.createNewGameStat();
     resetGame();
-    history.push("/leaderboard");
+    history.push('/leaderboard');
   };
 
   const exitToMainMenu = () => {
@@ -93,10 +84,10 @@ const TriviaShow = (props) => {
       multiple_choice.map((choice) => {
         const btnClicked = document.getElementById(choice);
         const btnCorrect = document.getElementById(question.correct_answer);
-        btnClicked.classList.remove("btn-success");
-        btnClicked.classList.remove("btn-danger");
-        btnCorrect.classList.remove("btn-success");
-        btnCorrect.classList.remove("btn-danger");
+        btnClicked.classList.remove('btn-success');
+        btnClicked.classList.remove('btn-danger');
+        btnCorrect.classList.remove('btn-success');
+        btnCorrect.classList.remove('btn-danger');
       });
     },
     [question]
@@ -108,13 +99,13 @@ const TriviaShow = (props) => {
     const btnCorrect = document.getElementById(question.correct_answer);
 
     console.log(question.correct_answer);
-    console.log("id: ", id);
-    console.log("question length: ", questionsLength);
+    console.log('id: ', id);
+    console.log('question length: ', questionsLength);
 
     if (lives === 1 && choice !== question.correct_answer) {
-      btnClicked.classList.add("btn-danger");
-      btnCorrect.classList.add("btn-success");
-      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
+      btnClicked.classList.add('btn-danger');
+      btnCorrect.classList.add('btn-success');
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]['negative'], 1);
       setWrongPicture(true);
       setTimeout(function () {
         setLoserModal(true);
@@ -124,8 +115,8 @@ const TriviaShow = (props) => {
       parseInt(id) === questionsLength - 1 &&
       choice === question.correct_answer
     ) {
-      btnClicked.classList.add("btn-success");
-      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
+      btnClicked.classList.add('btn-success');
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]['positive'], 0);
       setConfetti(true);
       setWinPicture(true);
       setTimeout(function () {
@@ -136,36 +127,35 @@ const TriviaShow = (props) => {
       parseInt(id) === questionsLength - 1 &&
       choice !== question.correct_answer
     ) {
-      btnClicked.classList.add("btn-danger");
-      btnCorrect.classList.add("btn-success");
-      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
+      btnClicked.classList.add('btn-danger');
+      btnCorrect.classList.add('btn-success');
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]['negative'], 1);
       setConfetti(true);
       setWrongPicture(true);
       setTimeout(function () {
         setWinnerModal(true);
       }, 500);
     } else if (choice === question.correct_answer) {
-      btnClicked.classList.add("btn-success");
-      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["positive"], 0);
+      btnClicked.classList.add('btn-success');
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]['positive'], 0);
       setWinPicture(true);
     } else {
-      btnClicked.classList.add("btn-danger");
-      btnCorrect.classList.add("btn-success");
-      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]["negative"], 1);
+      btnClicked.classList.add('btn-danger');
+      btnCorrect.classList.add('btn-success');
+      updateGameState(DIFFICULTY_SCORE_MAP[difficulty]['negative'], 1);
       setWrongPicture(true);
     }
   };
 
   console.log(score);
   console.log(lives);
-  console.log("show cofetti: ", showConfetti);
+  console.log('show cofetti: ', showConfetti);
 
   return (
     <>
-      {showWinPicture && 
-        <img src={smart_donkey} className="donkey-correct">
-        </img>
-      }
+      {showWinPicture && (
+        <img src={smart_donkey} className="donkey-correct"></img>
+      )}
       <div className="show-container">
         <div className="question-container">
           <div className="score-lives-bar">
@@ -193,7 +183,9 @@ const TriviaShow = (props) => {
           {showLoserModal && (
             <div className="loser-modal">
               <Modal isOpen={showLoserModal}>
-                <ModalHeader className="loser-modal-header">Game Over!</ModalHeader>
+                <ModalHeader className="loser-modal-header">
+                  Game Over!
+                </ModalHeader>
                 <ModalBody className="loser-modal-body">
                   LOSER! LOSER! LOSER! LOSER! LOSER! LOSER! Please continute to
                   the Leader Board to see your final score.
@@ -235,10 +227,9 @@ const TriviaShow = (props) => {
           </div>
         </div>
       </div>
-      {showWrongPicture && 
-        <img src={stupid_donkey} className="donkey-wrong">
-        </img>
-      }
+      {showWrongPicture && (
+        <img src={stupid_donkey} className="donkey-wrong"></img>
+      )}
     </>
   );
 };

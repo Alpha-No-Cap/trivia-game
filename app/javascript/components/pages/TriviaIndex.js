@@ -1,29 +1,28 @@
-import React, { useState, Component } from "react";
-import { useHistory, NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory, NavLink } from 'react-router-dom';
 import {
-  ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledButtonDropdown,
   Button
-} from "reactstrap";
-import { capitalize } from "lodash";
+} from 'reactstrap';
+import { capitalize } from 'lodash';
 
 const TriviaIndex = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
   const [dropdownCat, setOpenCat] = useState(false);
   const toggle = () => setOpen(!dropdownOpen);
   const toggleCat = () => setOpenCat(!dropdownCat);
-  const [difficulty, setDifficulty] = useState("Select Difficulty");
+  const [difficulty, setDifficulty] = useState('Select Difficulty');
   const [category, setCategory] = useState();
-  const [categoryLabel, setCategoryLabel] = useState("Select Category");
+  const [categoryLabel, setCategoryLabel] = useState('Select Category');
   const history = useHistory();
 
   const onSubmit = () => {
     props.setStateCategoryDifficulty(category, difficulty);
     props.url(category, difficulty).then(() => {
-      history.push("/triviashow/0");
+      history.push('/triviashow/0');
     });
   };
 
@@ -41,7 +40,6 @@ const TriviaIndex = (props) => {
                   setCategory(category.id);
                   setCategoryLabel(category.name);
                 };
-
                 return (
                   <DropdownItem onClick={handlSetCategory} key={category.id}>
                     {category.name}
@@ -55,13 +53,13 @@ const TriviaIndex = (props) => {
             <DropdownToggle caret>{capitalize(difficulty)}</DropdownToggle>
 
             <DropdownMenu>
-              <DropdownItem onClick={() => setDifficulty("easy")}>
+              <DropdownItem onClick={() => setDifficulty('easy')}>
                 Easy
               </DropdownItem>
-              <DropdownItem onClick={() => setDifficulty("medium")}>
+              <DropdownItem onClick={() => setDifficulty('medium')}>
                 Medium
               </DropdownItem>
-              <DropdownItem onClick={() => setDifficulty("hard")}>
+              <DropdownItem onClick={() => setDifficulty('hard')}>
                 Hard
               </DropdownItem>
             </DropdownMenu>
