@@ -1,17 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import mockdata from "./mockdata.js";
-import TriviaIndex from "./pages/TriviaIndex";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./pages/Home";
-import mockquestions from "./mockquestions.js";
-import TriviaShow from "./pages/TriviaShow";
-import LeaderBoard from "./pages/LeaderBoard";
-import Header from "./components/Header";
-import NotFound from "./pages/NotFound";
-import About from "./pages/About";
+import React, { Component } from 'react';
+import mockdata from './mockdata.js';
+import TriviaIndex from './pages/TriviaIndex';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import TriviaShow from './pages/TriviaShow';
+import LeaderBoard from './pages/LeaderBoard';
+import Header from './components/Header';
+import NotFound from './pages/NotFound';
+import About from './pages/About';
 
-//doesnt get manipulated
 const initialState = {
   categories: mockdata,
   questions: [],
@@ -23,10 +20,9 @@ const initialState = {
   difficulty: null
 };
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
-    // basically a copy
     this.state = initialState;
   }
 
@@ -42,7 +38,7 @@ class App extends React.Component {
         this.setState({ questions: payload.results });
       })
       .catch((errors) => {
-        console.log("questions errors", errors);
+        console.log('questions errors', errors);
       });
   };
 
@@ -58,8 +54,6 @@ class App extends React.Component {
   };
 
   resetGame = () => {
-    // save final score
-    // reset score, lives, questions to initial state
     this.setState({
       questions: initialState.questions,
       score: initialState.score,
@@ -72,7 +66,7 @@ class App extends React.Component {
   }
 
   indexGames = () => {
-    fetch("/games")
+    fetch('/games')
       .then((response) => {
         console.log(response);
         return response.json();
@@ -82,7 +76,7 @@ class App extends React.Component {
         console.log(payload);
       })
       .catch((errors) => {
-        console.log("index errors:", errors);
+        console.log('index errors:', errors);
       });
   };
 
@@ -93,16 +87,16 @@ class App extends React.Component {
       difficulty: this.state.difficulty,
       user_id: this.props.current_user.id
     };
-    return fetch("/games", {
+    return fetch('/games', {
       body: JSON.stringify({ game: gameParams }),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      method: "POST"
+      method: 'POST'
     })
       .then((response) => {
         if (response.status === 422) {
-          alert("Please check your submission.");
+          alert('Please check your submission.');
         }
         return response.json();
       })
@@ -110,7 +104,7 @@ class App extends React.Component {
         this.indexGames();
       })
       .catch((errors) => {
-        console.log("create errors:", errors);
+        console.log('create errors:', errors);
       });
   };
 
@@ -123,11 +117,6 @@ class App extends React.Component {
       sign_out_route
     } = this.props;
 
-    console.log(this.state.category);
-    console.log(this.state.difficulty);
-    console.log("questions: ", this.state.questions);
-    console.log("logged_in:", logged_in);
-    console.log("current user:", current_user);
     return (
       <Router>
         <Header />
